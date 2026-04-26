@@ -1,0 +1,1114 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:13px;-webkit-font-smoothing:antialiased;background:#f1f5f9}
+
+/* ── TITLEBAR ── */
+.titlebar{background:#fff;border-bottom:2px solid #e2e8f0;padding:10px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.tb-icon{width:28px;height:28px;background:#1e40af;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tb-icon svg{width:14px;height:14px;fill:#fff}
+.tb-texts{flex:1;min-width:100px}
+.tb-title{font-size:13px;font-weight:700;color:#1e293b;line-height:1.2}
+.tb-sub{font-size:10px;color:#64748b}
+.tb-input{font-size:12px;padding:5px 9px;border-radius:7px;border:1px solid #cbd5e1;background:#f8fafc;color:#1e293b;width:160px;font-family:inherit}
+.tb-input:focus{outline:none;border-color:#93c5fd;background:#fff}
+.tb-date{font-size:12px;padding:5px 8px;border-radius:7px;border:1px solid #cbd5e1;background:#f8fafc;color:#1e293b;font-family:inherit}
+.tbtn{font-size:11px;font-weight:500;padding:5px 11px;border-radius:7px;border:1px solid #cbd5e1;background:#fff;color:#334155;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .1s}
+.tbtn:hover{background:#f1f5f9;border-color:#94a3b8}
+.tbtn-blue{background:#1e40af;color:#fff;border-color:#1d4ed8;font-size:11px;font-weight:600;padding:5px 12px;border-radius:7px;cursor:pointer;font-family:inherit;transition:background .1s}
+.tbtn-blue:hover{background:#1d4ed8}
+.tbtn-purple{background:#7c3aed;color:#fff;border-color:#6d28d9;font-size:11px;font-weight:600;padding:5px 11px;border-radius:7px;cursor:pointer;font-family:inherit}
+.tbtn-purple:hover{background:#6d28d9}
+
+/* ── TABS MANSIONI ── */
+.mansioni-bar{background:#fff;border-bottom:1px solid #e2e8f0;padding:0 16px;display:flex;align-items:flex-end;gap:2px;overflow-x:auto}
+.tab{display:flex;align-items:center;gap:6px;padding:9px 13px 8px;font-size:12px;font-weight:500;color:#64748b;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;user-select:none;transition:color .12s}
+.tab:hover{color:#1e293b}
+.tab.active{color:#1e40af;border-bottom-color:#1e40af;font-weight:600}
+.tab-badge{background:#e2e8f0;color:#475569;font-size:9px;font-weight:700;padding:1px 6px;border-radius:999px}
+.tab.active .tab-badge{background:#dbeafe;color:#1e40af}
+.tab-del{background:none;border:none;color:#94a3b8;cursor:pointer;font-size:13px;padding:0 0 0 3px;line-height:1;font-family:inherit}
+.tab-del:hover{color:#ef4444}
+.tab-add{display:flex;align-items:center;gap:4px;padding:9px 12px 8px;font-size:11px;font-weight:600;color:#6366f1;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .1s}
+.tab-add:hover{color:#4f46e5}
+
+/* ── MANSIONE INFO STRIP ── */
+.mansione-strip{background:#fff;border-bottom:2px solid #e2e8f0;padding:8px 16px;display:flex;flex-direction:column;gap:6px}
+.mansione-row{display:flex;align-items:center;gap:8px}
+.mi-label{font-size:10px;font-weight:700;color:#64748b;white-space:nowrap;text-transform:uppercase;letter-spacing:.5px;min-width:80px}
+.mi-input{flex:1;font-size:12px;padding:5px 9px;border-radius:7px;border:1px solid #cbd5e1;background:#f8fafc;color:#1e293b;font-family:inherit;transition:border-color .1s}
+.mi-input:focus{outline:none;border-color:#93c5fd;background:#fff}
+.mi-input.nome{max-width:220px}
+.mansione-actions{display:flex;gap:5px;margin-left:auto}
+.tbtn-save-m{font-size:10px;font-weight:600;padding:4px 11px;border-radius:6px;border:1px solid #16a34a;background:#dcfce7;color:#15803d;cursor:pointer;font-family:inherit;white-space:nowrap}
+.tbtn-save-m:hover{background:#bbf7d0}
+.tbtn-load-m{font-size:10px;font-weight:600;padding:4px 11px;border-radius:6px;border:1px solid #2563eb;background:#dbeafe;color:#1d4ed8;cursor:pointer;font-family:inherit;white-space:nowrap}
+.tbtn-load-m:hover{background:#bfdbfe}
+
+/* ── MAIN AREA ── */
+.main-area{background:#f1f5f9;padding:10px 12px 8px}
+
+/* SEZIONE LIBRERIA + MATRICE */
+.section-label{font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;padding-left:2px}
+
+.workspace{display:grid;grid-template-columns:140px 140px 130px 1fr 140px 140px;gap:8px;margin-bottom:8px}
+.lib-col{display:flex;flex-direction:column;gap:7px}
+
+/* lib cards */
+.lib-card{background:#fff;border:1px solid #e2e8f0;border-radius:9px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lib-card-hdr{padding:5px 9px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #f1f5f9;background:#f8fafc;display:flex;align-items:center;gap:5px}
+.lib-dot{width:7px;height:7px;border-radius:2px;flex-shrink:0}
+.lib-body{padding:5px}
+.chip-list{display:flex;flex-direction:column;gap:2px}
+.rchip{display:flex;align-items:center;gap:5px;padding:4px 6px;border-radius:6px;border:1px solid transparent;cursor:grab;user-select:none;transition:transform .1s,box-shadow .1s;font-size:10.5px;font-weight:500;font-family:inherit}
+.rchip:hover{transform:translateX(2px);box-shadow:0 1px 6px rgba(0,0,0,.1)}
+.rchip:active{cursor:grabbing;transform:scale(.97)}
+.rchip.used{opacity:.18;cursor:default;pointer-events:none}
+.cicon{width:18px;height:18px;border-radius:3px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:#fff}
+.clabel{font-size:10.5px;font-weight:500;line-height:1.2}
+
+/* matrice */
+.matrix-panel{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.mx-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:5px}
+.mx-title{font-size:12px;font-weight:700;color:#1e293b}
+.legend{display:flex;gap:7px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:3px;font-size:9.5px;color:#64748b}
+.leg-dot{width:7px;height:7px;border-radius:2px;flex-shrink:0}
+.mx-inner{display:flex;gap:5px;align-items:center}
+.yax{writing-mode:vertical-rl;transform:rotate(180deg);font-size:9px;font-weight:600;color:#64748b;white-space:nowrap}
+.mgrid{flex:1}
+.col-row{display:grid;grid-template-columns:44px repeat(4,1fr);gap:3px;margin-bottom:3px}
+.chdr{text-align:center;font-size:9px;font-weight:700;color:#64748b}
+.chdr span{display:block;font-size:8px;font-weight:400;color:#94a3b8}
+.mrow{display:grid;grid-template-columns:44px repeat(4,1fr);gap:3px;margin-bottom:3px}
+.rhdr{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;padding-right:5px;font-size:9px;font-weight:700;color:#64748b;text-align:right;line-height:1.2}
+.rhdr span{font-size:8px;font-weight:400;color:#94a3b8}
+.cell{min-height:60px;border-radius:7px;padding:3px;position:relative;display:flex;flex-wrap:wrap;gap:2px;align-content:flex-start;transition:filter .12s}
+.cell.drag-over{filter:brightness(.78);outline:2px dashed rgba(255,255,255,.9)}
+.cscore{position:absolute;bottom:2px;right:3px;font-size:9px;font-weight:700}
+.BASSO{background:#22c55e}.MEDIO{background:#eab308}.ALTO{background:#f97316}.MOLTO_ALTO{background:#ef4444}
+.sd{color:#14532d}.sl{color:rgba(255,255,255,.75)}
+.pchip{display:inline-flex;align-items:center;font-size:8px;font-weight:700;font-family:inherit;padding:2px 5px;border-radius:4px;cursor:grab;color:#fff;line-height:1.3;max-width:100%;white-space:normal;word-break:break-word}
+.pchip:hover{filter:brightness(.88)}
+.pc-BASSO{background:#15803d}.pc-MEDIO{background:#b45309}.pc-ALTO{background:#c2410c}.pc-MOLTO_ALTO{background:#b91c1c}
+.xax{text-align:center;font-size:9px;font-weight:600;color:#64748b;margin-top:5px}
+.hint{font-size:9px;color:#94a3b8;text-align:center;margin-top:3px}
+
+/* ── MISURE + DPI ROW ── */
+.mis-dpi-row{display:grid;grid-template-columns:1fr 1fr;background:#fff;border-top:2px solid #e2e8f0;border-bottom:2px solid #e2e8f0;margin:0 0 8px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.misure-half{padding:9px 12px;border-right:1px solid #e2e8f0}
+.dpi-half{padding:9px 12px}
+.mis-dpi-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.misure-label{font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.misure-label::before{content:'';display:inline-block;width:3px;height:14px;background:#6366f1;border-radius:2px}
+.dpi-label{font-size:10px;font-weight:700;color:#0369a1;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.dpi-label::before{content:'';display:inline-block;width:3px;height:14px;background:#0ea5e9;border-radius:2px}
+/* misure chips */
+.mchip{display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;border:1.5px solid #6366f1;background:#eef2ff;color:#3730a3;font-size:11px;font-weight:600;cursor:grab;user-select:none;font-family:inherit;white-space:nowrap;transition:transform .1s,box-shadow .1s;margin:1px}
+.mchip:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(99,102,241,.2)}
+.mchip:active{cursor:grabbing}
+.mchip-custom{border-color:#7c3aed;background:#f5f3ff;color:#4c1d95}
+.tbtn-add-mis{font-size:11px;font-weight:600;padding:4px 11px;border-radius:999px;border:1.5px dashed #6366f1;background:transparent;color:#6366f1;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .1s}
+.tbtn-add-mis:hover{background:#eef2ff}
+/* DPI chips */
+.dchip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:999px;border:1.5px solid #0ea5e9;background:#f0f9ff;color:#0c4a6e;font-size:11px;font-weight:600;cursor:grab;user-select:none;font-family:inherit;white-space:nowrap;transition:transform .1s,box-shadow .1s;margin:1px}
+.dchip:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(14,165,233,.2)}
+.dchip:active{cursor:grabbing}
+.dchip.dpi-used{opacity:.15;cursor:default;pointer-events:none}
+/* DPI drop zone */
+.dpi-zone-wrap{margin-top:6px}
+.dpi-zone-title{font-size:9px;font-weight:700;color:#0369a1;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+.dpi-dropzone{min-height:38px;border-radius:8px;border:2px dashed #0ea5e9;background:#f0f9ff;padding:5px 8px;display:flex;flex-wrap:wrap;gap:3px;align-items:center;transition:background .15s,border-color .15s}
+.dpi-dropzone.over{background:#e0f2fe;border-style:solid;border-color:#0284c7}
+.dpi-ph{font-size:10px;color:#7dd3fc;font-style:italic;pointer-events:none;user-select:none}
+.dpi-placed{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;background:#0ea5e9;color:#fff;font-size:11px;font-weight:600;font-family:inherit;white-space:nowrap;margin:1px}
+.dpi-placed-x{background:none;border:none;color:rgba(255,255,255,.75);cursor:pointer;font-size:13px;padding:0 0 0 2px;line-height:1;font-family:inherit;transition:color .1s}
+.dpi-placed-x:hover{color:#fff}
+
+/* ── BOTTOM: TABELLA + COMPATIBILITÀ ── */
+.bottom-area{display:grid;grid-template-columns:1fr 340px;gap:10px;padding:0 0 0}
+
+/* tabella */
+.tbl-card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.tbl-hdr{background:#f8fafc;border-bottom:2px solid #e2e8f0;padding:8px 12px;display:flex;align-items:center;gap:8px}
+.tbl-ttl{font-size:12px;font-weight:700;color:#1e293b}
+.tbl-dot{width:4px;height:16px;background:#1e40af;border-radius:2px}
+table{width:100%;border-collapse:collapse;font-size:12px;font-family:inherit}
+th{background:#f8fafc;font-weight:600;font-size:10px;padding:7px 10px;text-align:left;border-bottom:1px solid #e2e8f0;color:#64748b;text-transform:uppercase;letter-spacing:.4px}
+td{padding:7px 10px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafafa}
+.mis-cell{min-height:28px;border-radius:6px;border:1px dashed #cbd5e1;padding:3px 6px;display:flex;flex-wrap:wrap;align-items:center;gap:3px;transition:border-color .15s,background .1s}
+.mis-cell.drag-over-mis{border-color:#6366f1;background:#eef2ff}
+.mis-cell-ph{font-size:10px;color:#94a3b8;font-style:italic;pointer-events:none}
+.mis-tag{display:inline-flex;align-items:center;gap:2px;background:#eef2ff;color:#3730a3;border:1px solid #a5b4fc;border-radius:999px;font-size:10px;font-weight:600;padding:2px 7px}
+.mis-tag-x{background:none;border:none;color:#6366f1;cursor:pointer;font-size:12px;padding:0 0 0 2px;line-height:1;font-family:inherit}
+.mis-tag-x:hover{color:#ef4444}
+.lvbadge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600}
+.lv-BASSO{background:#dcfce7;color:#15803d}.lv-MEDIO{background:#fef9c3;color:#854d0e}
+.lv-ALTO{background:#ffedd5;color:#9a3412}.lv-MOLTO_ALTO{background:#fee2e2;color:#991b1b}
+.rbtn{background:none;border:none;color:#cbd5e1;cursor:pointer;font-size:13px;padding:0 4px;font-family:inherit;transition:color .1s}
+.rbtn:hover{color:#ef4444}
+.empty-tbl{text-align:center;padding:24px;color:#94a3b8;font-size:12px}
+
+/* compatibilità */
+.compat-panel{background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.compat-hdr{background:#f8fafc;border-bottom:2px solid #e2e8f0;padding:8px 12px;display:flex;align-items:center;gap:8px}
+.compat-hdr-title{font-size:12px;font-weight:700;color:#1e293b}
+.compat-dot{width:4px;height:16px;background:#7c3aed;border-radius:2px}
+.compat-body{padding:12px}
+.compat-section{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #f1f5f9}
+.compat-section:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.compat-section-title{font-size:11px;font-weight:700;color:#1e293b;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.compat-icon{font-size:14px}
+.compat-radio-row{display:flex;gap:5px;margin-bottom:8px}
+.compat-radio{display:flex;align-items:center;gap:4px;cursor:pointer;font-size:10.5px;font-weight:500;padding:4px 8px;border-radius:6px;border:1.5px solid #e2e8f0;background:#f8fafc;color:#64748b;transition:all .1s;flex:1;justify-content:center}
+.compat-radio:hover{border-color:#94a3b8;background:#f1f5f9}
+.compat-radio.sel-si{background:#dcfce7;color:#15803d;border-color:#86efac}
+.compat-radio.sel-parziale{background:#fef9c3;color:#854d0e;border-color:#fde047}
+.compat-radio.sel-no{background:#fee2e2;color:#991b1b;border-color:#fca5a5}
+.compat-motivazioni{display:none;margin-top:6px}
+.compat-motivazioni.show{display:block}
+.compat-motiv-title{font-size:10px;font-weight:600;color:#64748b;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+.compat-check-row{display:flex;align-items:flex-start;gap:6px;padding:3px 0;cursor:pointer}
+.compat-check-row input[type=checkbox]{margin-top:1px;flex-shrink:0;accent-color:#dc2626}
+.compat-check-label{font-size:10.5px;color:#1e293b;line-height:1.4;cursor:pointer}
+.compat-note{width:100%;font-size:11px;padding:5px 7px;border-radius:6px;border:1px solid #e2e8f0;background:#f8fafc;color:#1e293b;font-family:inherit;resize:vertical;min-height:50px;margin-top:6px}
+.compat-note:focus{outline:none;border-color:#93c5fd;background:#fff}
+
+/* ── MODALI ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:500;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.modal-overlay.open{display:flex}
+.modal-box{background:#fff;border-radius:14px;border:1px solid #e2e8f0;padding:24px;width:400px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,.18)}
+.modal-box h3{font-size:15px;font-weight:700;color:#1e293b;margin-bottom:16px}
+.mf{margin-bottom:12px}
+.mf label{display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
+.mf input,.mf select,.mf textarea{width:100%;font-size:12px;padding:7px 10px;border-radius:7px;border:1px solid #cbd5e1;background:#f8fafc;color:#1e293b;font-family:inherit;transition:border-color .1s}
+.mf input:focus,.mf select:focus,.mf textarea:focus{outline:none;border-color:#93c5fd;background:#fff}
+.mf textarea{resize:vertical;min-height:65px;line-height:1.5}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;padding-top:12px;border-top:1px solid #f1f5f9}
+.mbtn-cancel{font-size:12px;padding:6px 14px;border-radius:7px;border:1px solid #cbd5e1;background:#fff;color:#475569;cursor:pointer;font-family:inherit}
+.mbtn-cancel:hover{background:#f1f5f9}
+.mbtn-save{font-size:12px;font-weight:700;padding:6px 18px;border-radius:7px;border:none;cursor:pointer;font-family:inherit;color:#fff;transition:filter .1s}
+.mbtn-save:hover{filter:brightness(.9)}
+
+/* ── ANTEPRIMA ── */
+.preview-panel{display:none;padding:0 12px 20px;background:#f1f5f9}
+.preview-panel.open{display:block}
+.prev-header{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:14px 18px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.prev-header-top{display:flex;align-items:flex-start;justify-content:space-between;border-bottom:3px solid #1e40af;padding-bottom:10px;margin-bottom:10px}
+.prev-header-title{font-size:16px;font-weight:700;color:#1e40af}
+.prev-header-sub{font-size:10px;color:#64748b;margin-top:2px}
+.prev-header-meta{text-align:right;font-size:11px;color:#475569;line-height:1.8}
+.prev-header-meta strong{color:#1e293b}
+.prev-tabs-bar{display:flex;align-items:flex-end;gap:2px;overflow-x:auto}
+.prev-tab{padding:7px 14px;font-size:12px;font-weight:500;color:#64748b;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;user-select:none;transition:color .12s;border-radius:6px 6px 0 0}
+.prev-tab:hover{color:#1e293b;background:#f8fafc}
+.prev-tab.active{color:#1e40af;border-bottom-color:#1e40af;font-weight:600;background:#eff6ff}
+.prev-content{background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.prev-mansione-hdr{background:#1e3a8a;padding:9px 18px;display:flex;align-items:center;gap:10px}
+.prev-mansione-badge{background:#3b82f6;color:#fff;font-size:10px;font-weight:700;padding:2px 10px;border-radius:999px}
+.prev-mansione-name{font-size:12px;font-weight:700;color:#fff}
+.prev-mansione-sub{font-size:10px;color:#bfdbfe;margin-top:1px}
+.prev-legbar{display:flex;align-items:center;gap:14px;padding:8px 18px;background:#f8fafc;border-bottom:1px solid #e2e8f0;flex-wrap:wrap}
+.prev-li{display:flex;align-items:center;gap:5px;font-size:10px;color:#475569;font-weight:500}
+.prev-ld{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.prev-legend-note{margin-left:auto;font-size:10px;color:#94a3b8}
+.prev-table{width:100%;border-collapse:collapse;font-size:11px;font-family:inherit}
+.prev-table thead tr{background:#1e40af}
+.prev-table th{color:#fff;font-weight:600;font-size:9.5px;padding:8px 10px;text-align:left;letter-spacing:.3px;text-transform:uppercase}
+.prev-table td{padding:8px 10px;vertical-align:top;border-bottom:1px solid #f1f5f9}
+.prev-table tr:nth-child(even) td{background:#f8fafc}
+.prev-table tr:nth-child(odd) td{background:#fff}
+.editable{border:none;background:transparent;font-family:inherit;font-size:11px;color:#1e293b;width:100%;resize:none;outline:none;line-height:1.5;padding:0;cursor:text}
+.editable:focus{background:#eff6ff;border-radius:4px;padding:2px 4px}
+.editable::placeholder{color:#94a3b8;font-style:italic}
+.prev-footer-bar{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 16px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.prev-footer-note{font-size:9px;color:#94a3b8}
+.prev-actions{display:flex;gap:7px;flex-wrap:wrap}
+.btn-back{font-size:11px;font-weight:500;padding:6px 13px;border-radius:7px;border:1px solid #cbd5e1;background:#fff;color:#475569;cursor:pointer;font-family:inherit}
+.btn-back:hover{background:#f1f5f9}
+.btn-print-cur{font-size:11px;font-weight:600;padding:6px 13px;border-radius:7px;border:none;background:#1e40af;color:#fff;cursor:pointer;font-family:inherit}
+.btn-print-cur:hover{background:#1d4ed8}
+.btn-print-all{font-size:11px;font-weight:700;padding:6px 15px;border-radius:7px;border:none;background:#16a34a;color:#fff;cursor:pointer;font-family:inherit}
+.btn-print-all:hover{background:#15803d}
+</style>
+
+<div id="main-view">
+
+<!-- TITLEBAR -->
+<div class="titlebar">
+  <div class="tb-icon"><svg viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg></div>
+  <div class="tb-texts">
+    <div class="tb-title">Valutazione dei rischi — Multi-mansione</div>
+    <div class="tb-sub">D.Lgs. 81/08 — metodo P×D</div>
+  </div>
+  <input type="text" class="tb-input" id="az" placeholder="Nome azienda..." />
+  <input type="date" class="tb-date" id="az-date" />
+  <button class="tbtn-purple" onclick="openAddRiskModal()">+ Rischio</button>
+  <button class="tbtn" onclick="saveJSON()">Salva tutto</button>
+  <button class="tbtn" onclick="document.getElementById('lf-all').click()">Apri tutto</button>
+  <input type="file" id="lf-all" accept=".json" style="display:none" onchange="loadAllJSON(event)"/>
+  <button class="tbtn-blue" onclick="openPreview()">Anteprima valutazione</button>
+</div>
+
+<!-- TABS MANSIONI -->
+<div class="mansioni-bar" id="mansioni-bar"></div>
+
+<!-- MANSIONE INFO -->
+<div class="mansione-strip">
+  <div class="mansione-row">
+    <span class="mi-label">Mansione</span>
+    <input type="text" class="mi-input nome" id="m-nome" placeholder="Nome mansione..." oninput="updateMansioneField('nome',this.value)"/>
+    <span class="mi-label" style="margin-left:8px">Descrizione</span>
+    <input type="text" class="mi-input" id="m-desc-field" placeholder="Breve descrizione delle attività svolte..." oninput="updateMansioneField('desc',this.value)"/>
+    <div class="mansione-actions">
+      <button class="tbtn-save-m" onclick="saveMansioneJSON()">↓ Salva mansione</button>
+      <button class="tbtn-load-m" onclick="document.getElementById('lf-mansione').click()">↑ Carica mansione</button>
+      <input type="file" id="lf-mansione" accept=".json" style="display:none" onchange="loadMansioneJSON(event)"/>
+    </div>
+  </div>
+  <div class="mansione-row">
+    <span class="mi-label">Attrezzature</span>
+    <input type="text" class="mi-input" id="m-attrezz" placeholder="Es. Carrello elevatore, PC, flessibile, trapano, ecc..." oninput="updateMansioneField('attrezz',this.value)"/>
+  </div>
+</div>
+
+<!-- WORKSPACE: LIBRERIA + MATRICE -->
+<div class="main-area">
+  <div class="section-label">📚 Libreria rischi — trascina sulla matrice</div>
+  <div class="workspace">
+    <div class="lib-col" id="col-sx1"></div>
+    <div class="lib-col" id="col-sx2"></div>
+    <div class="lib-col" id="col-sx3"></div>
+    <div class="matrix-panel">
+      <div class="mx-top">
+        <div class="mx-title">⊞ Matrice P × D</div>
+        <div class="legend">
+          <div class="leg-item"><div class="leg-dot" style="background:#22c55e"></div>Basso 1–4</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#eab308"></div>Medio 5–8</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#f97316"></div>Alto 9–12</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#ef4444"></div>Molto alto 13–16</div>
+        </div>
+      </div>
+      <div class="mx-inner">
+        <div class="yax">Probabilità</div>
+        <div class="mgrid">
+          <div class="col-row" id="col-hdrs"></div>
+          <div id="matrix"></div>
+          <div class="xax">Danno (magnitudo)</div>
+        </div>
+      </div>
+      <div class="hint">Trascina i rischi sulla matrice • Trascina un chip per spostarlo</div>
+    </div>
+    <div class="lib-col" id="col-dx1"></div>
+    <div class="lib-col" id="col-dx2"></div>
+  </div>
+</div>
+
+<!-- MISURE + DPI -->
+<div class="mis-dpi-row">
+  <div class="misure-half">
+    <div class="mis-dpi-hdr">
+      <span class="misure-label">Misure di prevenzione</span>
+      <button class="tbtn-add-mis" onclick="openAddMisModal()">+ Aggiungi</button>
+    </div>
+    <div id="misure-chips"></div>
+  </div>
+  <div class="dpi-half">
+    <div class="mis-dpi-hdr">
+      <span class="dpi-label">Dispositivi di protezione individuale (DPI)</span>
+    </div>
+    <div id="dpi-chips"></div>
+    <div class="dpi-zone-wrap">
+      <div class="dpi-zone-title">🦺 DPI di mansione — trascina qui i DPI richiesti</div>
+      <div class="dpi-dropzone" id="dpi-dropzone"
+        ondragover="onDpiZoneOver(event)"
+        ondragleave="onDpiZoneLeave(event)"
+        ondrop="onDpiZoneDrop(event)">
+        <span class="dpi-ph" id="dpi-zone-ph">Nessun DPI selezionato...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM: TABELLA + COMPATIBILITÀ -->
+<div style="padding:0 12px 12px;background:#f1f5f9">
+  <div class="section-label" style="margin-bottom:6px">📋 Registro valutazione rischi</div>
+  <div class="bottom-area">
+    <div class="tbl-card">
+      <div class="tbl-hdr">
+        <div class="tbl-dot"></div>
+        <div class="tbl-ttl" id="tbl-ttl">Registro valutazione rischi</div>
+      </div>
+      <div id="tbl-wrap"><div class="empty-tbl">Nessun rischio valutato. Trascina un rischio dalla libreria sulla matrice.</div></div>
+    </div>
+    <div class="compat-panel">
+      <div class="compat-hdr">
+        <div class="compat-dot"></div>
+        <div class="compat-hdr-title">Compatibilità mansione</div>
+      </div>
+      <div class="compat-body" id="compat-body">
+        <div style="font-size:11px;color:#94a3b8;text-align:center;padding:14px">Seleziona o crea una mansione.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- MODALI -->
+<div class="modal-overlay" id="modal-mansione">
+  <div class="modal-box">
+    <h3>Nuova mansione</h3>
+    <div class="mf"><label>Nome</label><input type="text" id="mm-nome" placeholder="Es. Operaio, Impiegato..."/></div>
+    <div class="mf"><label>Descrizione</label><textarea id="mm-desc" placeholder="Breve descrizione attività..."></textarea></div>
+    <div class="mf"><label>Attrezzature utilizzate</label><input type="text" id="mm-attrezz" placeholder="Es. Carrello elevatore, PC..."/></div>
+    <div class="modal-footer">
+      <button class="mbtn-cancel" onclick="closeModal('modal-mansione')">Annulla</button>
+      <button class="mbtn-save" style="background:#1e40af" onclick="confirmAddMansione()">Crea mansione</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-risk">
+  <div class="modal-box">
+    <h3>Aggiungi rischio alla libreria</h3>
+    <div class="mf"><label>Nome</label><input type="text" id="mr-name" placeholder="Es. Lavoro in quota..."/></div>
+    <div class="mf"><label>Categoria</label>
+      <select id="mr-cat">
+        <option value="Generali">Generali</option><option value="Fisici">Fisici</option>
+        <option value="Chimici">Chimici</option><option value="Ergonomici">Ergonomici</option>
+        <option value="Trasversali">Trasversali</option><option value="Personalizzati">Personalizzati</option>
+      </select>
+    </div>
+    <div class="mf"><label>Descrizione</label><textarea id="mr-desc" placeholder="Descrizione..."></textarea></div>
+    <div class="modal-footer">
+      <button class="mbtn-cancel" onclick="closeModal('modal-risk')">Annulla</button>
+      <button class="mbtn-save" style="background:#7c3aed" onclick="confirmAddRisk()">Aggiungi</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-mis">
+  <div class="modal-box">
+    <h3>Aggiungi misura di prevenzione</h3>
+    <div class="mf"><label>Nome misura</label><input type="text" id="mm-mis-name" placeholder="Es. Utilizzo ponteggi omologati..."/></div>
+    <div class="modal-footer">
+      <button class="mbtn-cancel" onclick="closeModal('modal-mis')">Annulla</button>
+      <button class="mbtn-save" style="background:#6366f1" onclick="confirmAddMis()">Aggiungi</button>
+    </div>
+  </div>
+</div>
+
+<!-- ANTEPRIMA -->
+<div class="preview-panel" id="preview-panel">
+  <div class="prev-header">
+    <div class="prev-header-top">
+      <div>
+        <div class="prev-header-title">Valutazione dei Rischi</div>
+        <div class="prev-header-sub">D.Lgs. 81/08 — Testo Unico Salute e Sicurezza — Metodo P×D</div>
+      </div>
+      <div class="prev-header-meta" id="prev-meta"></div>
+    </div>
+    <div class="prev-tabs-bar" id="prev-tabs-bar"></div>
+  </div>
+  <div class="prev-content" id="prev-content"></div>
+  <div class="prev-footer-bar">
+    <div class="prev-footer-note">Suite Sicurezza — Studio Essepi S.r.l.</div>
+    <div class="prev-actions">
+      <button class="btn-back" onclick="closePreview()">← Torna alla matrice</button>
+      <button class="btn-print-cur" onclick="printCurrentPrevTab()">Stampa questa mansione</button>
+      <button class="btn-print-all" onclick="printAll()">Stampa tutte le mansioni</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var COMPAT_MOTIVI={
+  gravidanza:{label:'Gravidanza',icon:'🤰',ref:'D.Lgs. 151/2001 – All. A e B',voci:[
+    {id:'g1',testo:'Agenti fisici: rumore, vibrazioni, radiazioni (All. A)'},
+    {id:'g2',testo:'Agenti chimici pericolosi, cancerogeni o mutageni (All. A)'},
+    {id:'g3',testo:'Agenti biologici gruppo 2, 3 o 4 (All. A)'},
+    {id:'g4',testo:'Movimentazione manuale carichi con rischio dorso-lombare (All. A)'},
+    {id:'g5',testo:'Lavoro notturno (art. 53 D.Lgs. 151/2001)'},
+    {id:'g6',testo:'Posture faticose, stazione eretta prolungata (All. A)'},
+    {id:'g7',testo:'Lavori in quota o con rischio di caduta (All. B)'},
+    {id:'g8',testo:'Esposizione a temperature estreme (All. A)'},
+    {id:'g9',testo:'Stress fisico eccessivo (All. A)'},
+    {id:'g10',testo:'Attrezzature con rischio meccanico elevato (All. B)'}
+  ]},
+  postpartum:{label:'Post partum (fino a 7 mesi)',icon:'👶',ref:'D.Lgs. 151/2001 – All. B e C',voci:[
+    {id:'p1',testo:'Agenti chimici tossici o cancerogeni (All. C)'},
+    {id:'p2',testo:'Agenti biologici gruppo 2, 3 o 4 (All. C)'},
+    {id:'p3',testo:'Lavoro notturno (art. 53 D.Lgs. 151/2001)'},
+    {id:'p4',testo:'Movimentazione manuale carichi (All. B)'},
+    {id:'p5',testo:'Posture faticose o stazione eretta prolungata (All. B)'},
+    {id:'p6',testo:'Esposizione a rumore o vibrazioni (All. B)'},
+    {id:'p7',testo:'Lavori su macchine o attrezzature pericolose (All. B)'},
+    {id:'p8',testo:'Esposizione a piombo e derivati (All. C)'}
+  ]},
+  minori:{label:'Minori (< 18 anni)',icon:'🧒',ref:'D.Lgs. 345/1999 – All. I',voci:[
+    {id:'m1',testo:'Agenti chimici tossici, cancerogeni, mutageni (All. I)'},
+    {id:'m2',testo:'Agenti biologici gruppi 3 o 4 (All. I)'},
+    {id:'m3',testo:'Radiazioni ionizzanti (All. I)'},
+    {id:'m4',testo:'Rumore >87 dB(A) (All. I)'},
+    {id:'m5',testo:'Movimentazione manuale carichi oltre i limiti (All. I)'},
+    {id:'m6',testo:'Macchine pericolose con rischio meccanico elevato (All. I)'},
+    {id:'m7',testo:'Installazioni elettriche ad alta tensione (All. I)'},
+    {id:'m8',testo:'Lavori in spazi confinati (All. I)'},
+    {id:'m9',testo:'Lavori in quota con rischio di caduta (All. I)'},
+    {id:'m10',testo:'Esposizione a temperature estreme (All. I)'}
+  ]}
+};
+var CATALOG=[
+  {name:"Agenti cancerogeni",cat:"Chimici",desc:"Esposizione a sostanze chimiche cancerogene o mutagene. Richiede sorveglianza sanitaria specifica."},
+  {name:"Amianto",cat:"Chimici",desc:"Esposizione a fibre di amianto durante attività di bonifica. Può causare gravi patologie respiratorie e tumori."},
+  {name:"Biologico",cat:"Chimici",desc:"Esposizione ad agenti biologici (batteri, virus, funghi) che possono causare infezioni, allergie o intossicazioni."},
+  {name:"Polveri",cat:"Chimici",desc:"Inalazione di polveri (silice, legno, metalli) con rischio di patologie respiratorie acute o croniche."},
+  {name:"Sostanze pericolose",cat:"Chimici",desc:"Manipolazione di sostanze chimiche pericolose con danni per inalazione, contatto cutaneo o ingestione."},
+  {name:"MMC",cat:"Ergonomici",desc:"Movimentazione Manuale dei Carichi con rischi di patologie da sovraccarico biomeccanico dorso-lombari."},
+  {name:"Movimenti ripetitivi",cat:"Ergonomici",desc:"Movimenti ripetuti degli arti superiori ad alta frequenza con rischio di patologie muscolo-scheletriche."},
+  {name:"Posture incongrue",cat:"Ergonomici",desc:"Mantenimento prolungato di posture non ergonomiche con rischio di disturbi muscolo-scheletrici."},
+  {name:"Traino e spinta",cat:"Ergonomici",desc:"Azioni di traino e spinta con sforzi fisici ripetuti e rischio di sovraccarico biomeccanico."},
+  {name:"Carenza illuminazione",cat:"Fisici",desc:"Insufficiente illuminazione con rischio di affaticamento visivo e aumento degli infortuni."},
+  {name:"CEM",cat:"Fisici",desc:"Esposizione a Campi Elettro-Magnetici generati da apparecchiature elettriche."},
+  {name:"Microclima",cat:"Fisici",desc:"Condizioni microclimatiche sfavorevoli con rischio di discomfort termico o colpi di calore/freddo."},
+  {name:"ROA",cat:"Fisici",desc:"Esposizione a Radiazioni Ottiche Artificiali (laser, saldatura, UV) con danni agli occhi o alla pelle."},
+  {name:"Rumore",cat:"Fisici",desc:"Esposizione a livelli di rumore >80 dB(A) con possibili danni all'udito temporanei o permanenti."},
+  {name:"Vibrazioni",cat:"Fisici",desc:"Esposizione a vibrazioni meccaniche al sistema mano-braccio o al corpo intero."},
+  {name:"Agenti atmosferici",cat:"Generali",desc:"Esposizione a condizioni atmosferiche avverse durante attività all'aperto."},
+  {name:"Aggressione",cat:"Generali",desc:"Rischio di aggressione fisica o verbale da parte di terzi."},
+  {name:"Annegamento",cat:"Generali",desc:"Rischio di caduta in acqua o altri liquidi con possibilità di annegamento."},
+  {name:"ATEX",cat:"Generali",desc:"Rischio di esplosione in atmosfera esplosiva per gas, vapori o polveri infiammabili."},
+  {name:"Attività in altezza",cat:"Generali",desc:"Lavori a quote >2 m con rischio di caduta dall'alto."},
+  {name:"Caduta oggetti dall'alto",cat:"Generali",desc:"Rischio di essere colpiti da oggetti che cadono durante lavorazioni in quota."},
+  {name:"Conduzione mezzi",cat:"Generali",desc:"Rischio connesso alla guida di mezzi per la movimentazione di materiali."},
+  {name:"Elettrocuzione",cat:"Generali",desc:"Rischio di contatto con parti in tensione con possibile shock elettrico o arresto cardiaco."},
+  {name:"Esposizione a calore",cat:"Generali",desc:"Esposizione a fonti di calore intenso con rischio di colpi di calore o ustioni."},
+  {name:"Esposizione a freddo",cat:"Generali",desc:"Esposizione a temperature molto basse con rischio di assideramento o ipotermia."},
+  {name:"Guida automezzi",cat:"Generali",desc:"Rischio connesso alla guida di veicoli aziendali su strada."},
+  {name:"Incendio",cat:"Generali",desc:"Rischio di incendio per presenza di materiali combustibili e fonti di innesco."},
+  {name:"Incidente stradale",cat:"Generali",desc:"Rischio di incidenti stradali durante spostamenti per lavoro."},
+  {name:"Investimento",cat:"Generali",desc:"Rischio di essere investiti da veicoli o mezzi in movimento."},
+  {name:"Proiezione materiali",cat:"Generali",desc:"Rischio di essere colpiti da schegge o materiali proiettati."},
+  {name:"Ribaltamento",cat:"Generali",desc:"Rischio di ribaltamento di mezzi o strutture con possibilità di schiacciamento."},
+  {name:"Rischi meccanici",cat:"Generali",desc:"Rischi da uso di macchine per mancanza di protezioni o uso improprio."},
+  {name:"Scivolamento/Inciampo",cat:"Generali",desc:"Rischio di caduta in piano per pavimenti scivolosi, dislivelli o ostacoli."},
+  {name:"Sistemi sollevamento",cat:"Generali",desc:"Rischio da uso di sistemi di sollevamento con possibilità di caduta carichi."},
+  {name:"Spazi confinati",cat:"Generali",desc:"Rischio di asfissia o intossicazione durante l'accesso a spazi confinati."},
+  {name:"Superfici pericolose",cat:"Generali",desc:"Superfici taglienti, abrasive o ustionanti con rischio di ferite."},
+  {name:"Taglio",cat:"Generali",desc:"Rischio di tagli e ferite da parti affilate di attrezzature, utensili o lamiere."},
+  {name:"Urti e compressioni",cat:"Generali",desc:"Rischio di essere colpiti o schiacciati da oggetti o parti di macchine."},
+  {name:"Uso di scale",cat:"Generali",desc:"Rischio di caduta durante l'utilizzo di scale portatili."},
+  {name:"Ustioni",cat:"Generali",desc:"Rischio di ustioni termiche o chimiche per contatto con superfici calde o sostanze corrosive."},
+  {name:"VDT",cat:"Generali",desc:"Affaticamento visivo e disturbi muscolo-scheletrici da utilizzo prolungato di videoterminali."},
+  {name:"Burn out",cat:"Trasversali",desc:"Sindrome da esaurimento emotivo dovuta a stress lavorativo cronico."},
+  {name:"Lavoro in solitaria",cat:"Trasversali",desc:"Rischio da esecuzione di attività in assenza di altri lavoratori."},
+  {name:"Lavoro notturno",cat:"Trasversali",desc:"Alterazioni del ritmo circadiano con disturbi del sonno e della salute."},
+  {name:"Mobbing",cat:"Trasversali",desc:"Comportamenti ostili e sistematici che causano danni psico-fisici alla vittima."},
+  {name:"Stress",cat:"Trasversali",desc:"Stress lavoro-correlato con disturbi psicofisici e riduzione della performance."},
+  {name:"Uso di alcol",cat:"Trasversali",desc:"Consumo di alcol che riduce capacità cognitive e riflessi."},
+  {name:"Uso di sostanze psicotrope",cat:"Trasversali",desc:"Assunzione di sostanze psicotrope che alterano il giudizio."}
+];
+var CAT_CFG={
+  "Fisici":        {bg:"#3b82f6",light:"#eff6ff",border:"#bfdbfe",text:"#1e40af"},
+  "Chimici":       {bg:"#f97316",light:"#fff7ed",border:"#fed7aa",text:"#7c2d12"},
+  "Ergonomici":    {bg:"#14b8a6",light:"#f0fdfa",border:"#99f6e4",text:"#134e4a"},
+  "Generali":      {bg:"#22c55e",light:"#f0fdf4",border:"#bbf7d0",text:"#166534"},
+  "Trasversali":   {bg:"#8b5cf6",light:"#f5f3ff",border:"#ddd6fe",text:"#4c1d95"},
+  "Personalizzati":{bg:"#ec4899",light:"#fdf2f8",border:"#fbcfe8",text:"#831843"}
+};
+var DEFAULT_CFG={bg:"#6b7280",light:"#f8fafc",border:"#e2e8f0",text:"#334155"};
+var MISURE_DEFAULT=["Formazione e informazione","Fornitura e utilizzo di DPI adeguati",
+  "Redazione e rispetto di procedure operative","Sorveglianza sanitaria periodica",
+  "Installazione di protezioni collettive","Manutenzione preventiva programmata",
+  "Segnaletica di sicurezza adeguata","Sostituzione con agenti meno pericolosi",
+  "Limitazione dei tempi di esposizione","Aggiornamento periodico del DVR"];
+var misureList=MISURE_DEFAULT.slice();
+var BGMAP={BASSO:'#22c55e',MEDIO:'#eab308',ALTO:'#f97316',MOLTO_ALTO:'#ef4444'};
+var TCMAP={BASSO:'#fff',MEDIO:'#422006',ALTO:'#fff',MOLTO_ALTO:'#fff'};
+
+var DPI_CATALOG=[
+  {id:'dpi01',icon:'👟',nome:'Scarpe antinfortunistiche'},
+  {id:'dpi02',icon:'🧤',nome:'Guanti (rischio meccanico)'},
+  {id:'dpi03',icon:'🧤',nome:'Guanti (rischio chimico)'},
+  {id:'dpi04',icon:'😷',nome:'Maschera filtrante FFP'},
+  {id:'dpi05',icon:'🫁',nome:'Maschera con filtro gas'},
+  {id:'dpi06',icon:'🪝',nome:'Dispositivi anticaduta'},
+  {id:'dpi07',icon:'🎧',nome:'Otoprotettori'},
+  {id:'dpi08',icon:'🦺',nome:'Giubbino alta visibilità'},
+  {id:'dpi09',icon:'⛑️',nome:'Casco protettivo'},
+  {id:'dpi10',icon:'🥽',nome:'Occhiali protettivi'},
+  {id:'dpi11',icon:'🛡️',nome:'Visiera protettiva'},
+  {id:'dpi12',icon:'🧥',nome:'Indumenti termici'}
+];
+
+var mansioni=[],activeMId=null,libItems=[],dragSource=null,dragId=null,dragMis=null,dragDpi=null,activePrevTabId=null;
+
+function genId(){return 'M_'+Date.now()+'_'+Math.floor(Math.random()*9999);}
+function defaultCompat(){var c={};Object.keys(COMPAT_MOTIVI).forEach(function(k){c[k]={stato:'',checklist:{},note:''};});return c;}
+function initLib(){libItems=[];CATALOG.forEach(function(r){libItems.push({id:'L_'+r.cat+'_'+r.name.replace(/\W/g,'_'),name:r.name,cat:r.cat,desc:r.desc});});}
+function getCfg(cat){return CAT_CFG[cat]||DEFAULT_CFG;}
+function getLevel(r){return r<=4?'BASSO':r<=8?'MEDIO':r<=12?'ALTO':'MOLTO_ALTO';}
+function getLevelLabel(r){return{BASSO:'Basso',MEDIO:'Medio',ALTO:'Alto',MOLTO_ALTO:'Molto alto'}[getLevel(r)];}
+function getActiveMansione(){return mansioni.find(function(m){return m.id===activeMId;});}
+function isUsedInActive(libId){var m=getActiveMansione();return m?!!(m.placed.find(function(p){return p.libId===libId;})):false;}
+function splitGenerali(){var gen=libItems.filter(function(r){return r.cat==='Generali';});var half=Math.ceil(gen.length/2);return{g1:gen.slice(0,half),g2:gen.slice(half)};}
+
+function buildCard(cat,items){
+  var cfg=getCfg(cat),ini=cat.substring(0,2).toUpperCase();
+  var chips=items.map(function(item){
+    var used=isUsedInActive(item.id);
+    return '<div class="rchip'+(used?' used':'')+'" draggable="true" data-libid="'+item.id+'"'+
+      ' style="background:'+cfg.light+';border-color:'+cfg.border+'" ondragstart="onLibDrag(event)">'+
+      '<div class="cicon" style="background:'+cfg.bg+'">'+ini+'</div>'+
+      '<span class="clabel" style="color:'+cfg.text+'">'+item.name+'</span></div>';
+  }).join('');
+  return '<div class="lib-card"><div class="lib-card-hdr"><div class="lib-dot" style="background:'+cfg.bg+'"></div>'+
+    '<span style="color:'+cfg.text+'">'+cat+'</span></div>'+
+    '<div class="lib-body"><div class="chip-list">'+chips+'</div></div></div>';
+}
+
+function renderLib(){
+  var s=splitGenerali();
+  document.getElementById('col-sx1').innerHTML=buildCard('Generali',s.g1);
+  document.getElementById('col-sx2').innerHTML=buildCard('Generali',s.g2);
+  document.getElementById('col-sx3').innerHTML=buildCard('Fisici',libItems.filter(function(i){return i.cat==='Fisici';}));
+  document.getElementById('col-dx1').innerHTML=buildCard('Chimici',libItems.filter(function(i){return i.cat==='Chimici';}))
+    +buildCard('Ergonomici',libItems.filter(function(i){return i.cat==='Ergonomici';}));
+  var per=libItems.filter(function(i){return i.cat==='Personalizzati';});
+  document.getElementById('col-dx2').innerHTML=buildCard('Trasversali',libItems.filter(function(i){return i.cat==='Trasversali';}))
+    +(per.length?buildCard('Personalizzati',per):'');
+}
+
+function renderTabs(){
+  var bar=document.getElementById('mansioni-bar');
+  var html=mansioni.map(function(m){
+    var active=m.id===activeMId,cnt=m.placed?m.placed.length:0;
+    return '<div class="tab'+(active?' active':'')+'" onclick="switchMansione(\''+m.id+'\')">'+(m.nome||'Nuova mansione')+
+      (cnt?'<span class="tab-badge">'+cnt+'</span>':'')+
+      (mansioni.length>1?'<button class="tab-del" onclick="deleteMansione(event,\''+m.id+'\')">×</button>':'')+
+      '</div>';
+  }).join('');
+  bar.innerHTML=html+'<div class="tab-add" onclick="openAddMansioneModal()">+ Nuova mansione</div>';
+}
+
+function renderMansioneInfo(){
+  var m=getActiveMansione();if(!m)return;
+  document.getElementById('m-nome').value=m.nome||'';
+  document.getElementById('m-desc-field').value=m.desc||'';
+  document.getElementById('m-attrezz').value=m.attrezz||'';
+  document.getElementById('tbl-ttl').textContent='Registro valutazione rischi'+(m.nome?' — '+m.nome:'');
+}
+
+function renderMatrix(){
+  document.getElementById('col-hdrs').innerHTML='<div></div>'+
+    '<div class="chdr">1<span>Lieve</span></div><div class="chdr">2<span>Moderato</span></div>'+
+    '<div class="chdr">3<span>Grave</span></div><div class="chdr">4<span>Gravissimo</span></div>';
+  var mx=document.getElementById('matrix');mx.innerHTML='';
+  var m=getActiveMansione(),placed=m?m.placed:[];
+  [{p:4,sub:'Quasi certo'},{p:3,sub:'Probabile'},{p:2,sub:'Poco prob.'},{p:1,sub:'Improbabile'}].forEach(function(row){
+    var div=document.createElement('div');div.className='mrow';
+    var hdr=document.createElement('div');hdr.className='rhdr';hdr.innerHTML=row.p+'<span>'+row.sub+'</span>';div.appendChild(hdr);
+    for(var d=1;d<=4;d++){
+      var r=row.p*d,lv=getLevel(r);
+      var cell=document.createElement('div');cell.className='cell '+lv;cell.dataset.p=row.p;cell.dataset.d=d;
+      var sc=document.createElement('div');sc.className='cscore '+(lv==='MEDIO'?'sd':'sl');sc.textContent=r;cell.appendChild(sc);
+      placed.filter(function(pk){return pk.p===row.p&&pk.d===d;}).forEach(function(pk){
+        var chip=document.createElement('div');chip.className='pchip pc-'+lv;chip.draggable=true;
+        chip.dataset.placedid=pk.id;chip.textContent=pk.name;chip.title='Trascina per spostare';
+        chip.addEventListener('dragstart',onPlacedDrag);cell.appendChild(chip);
+      });
+      (function(c,p,dd){
+        c.addEventListener('dragover',function(e){e.preventDefault();c.classList.add('drag-over');});
+        c.addEventListener('dragleave',function(){c.classList.remove('drag-over');});
+        c.addEventListener('drop',function(e){e.preventDefault();c.classList.remove('drag-over');onDrop(p,dd);});
+      })(cell,row.p,d);
+      div.appendChild(cell);
+    }
+    mx.appendChild(div);
+  });
+}
+
+function renderTable(){
+  var wrap=document.getElementById('tbl-wrap');
+  var m=getActiveMansione(),placed=m?m.placed:[];
+  if(!placed.length){wrap.innerHTML='<div class="empty-tbl">Nessun rischio valutato. Trascina un rischio dalla libreria sulla matrice.</div>';return;}
+  var sorted=placed.slice().sort(function(a,b){return(b.p*b.d)-(a.p*a.d);});
+  var rows=sorted.map(function(pk){
+    var r=pk.p*pk.d,lv=getLevel(r),cfg=getCfg(pk.cat);
+    var tags=(pk.misTags||[]).map(function(t,i){
+      return '<span class="mis-tag">'+esc(t)+'<button class="mis-tag-x" onclick="removeTag(\''+pk.id+'\','+i+')">×</button></span>';
+    }).join('');
+    var ph=tags?'':'<span class="mis-cell-ph">Trascina qui...</span>';
+    return '<tr>'+
+      '<td style="font-weight:600;font-size:12px">'+esc(pk.name)+'</td>'+
+      '<td><span style="background:'+cfg.light+';color:'+cfg.text+';border:1px solid '+cfg.border+';padding:2px 7px;border-radius:999px;font-size:10px;font-weight:600">'+esc(pk.cat)+'</span></td>'+
+      '<td style="text-align:center;font-weight:600">'+pk.p+'</td><td style="text-align:center;font-weight:600">'+pk.d+'</td>'+
+      '<td style="text-align:center"><span style="background:'+BGMAP[lv]+';color:'+TCMAP[lv]+';font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px;display:inline-block">'+r+'</span></td>'+
+      '<td><span class="lvbadge lv-'+lv+'">'+getLevelLabel(r)+'</span></td>'+
+      '<td><div class="mis-cell" data-pkid="'+pk.id+'" ondragover="onMisCellOver(event,this)" ondragleave="onMisCellLeave(this)" ondrop="onMisCellDrop(event,this)">'+ph+tags+'</div></td>'+
+      '<td><button class="rbtn" onclick="removeRisk(\''+pk.id+'\')">✕</button></td></tr>';
+  }).join('');
+  wrap.innerHTML='<table><thead><tr><th>Rischio</th><th style="width:88px">Categoria</th>'+
+    '<th style="width:26px;text-align:center">P</th><th style="width:26px;text-align:center">D</th>'+
+    '<th style="width:34px;text-align:center">R</th><th style="width:72px">Livello</th>'+
+    '<th>Misure di prevenzione e protezione</th><th style="width:22px"></th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+
+function renderCompat(){
+  var m=getActiveMansione();
+  var body=document.getElementById('compat-body');
+  if(!m){body.innerHTML='<div style="font-size:11px;color:#94a3b8;text-align:center;padding:14px">Seleziona una mansione.</div>';return;}
+  if(!m.compat)m.compat=defaultCompat();
+  var html='';
+  Object.keys(COMPAT_MOTIVI).forEach(function(key){
+    var cfg=COMPAT_MOTIVI[key];
+    var stato=m.compat[key].stato||'';
+    var checklist=m.compat[key].checklist||{};
+    var note=m.compat[key].note||'';
+    var showMotiv=(stato==='no'||stato==='parziale');
+    html+='<div class="compat-section">'+
+      '<div class="compat-section-title"><span class="compat-icon">'+cfg.icon+'</span>'+cfg.label+'</div>'+
+      '<div style="font-size:9px;color:#94a3b8;margin-bottom:6px">'+cfg.ref+'</div>'+
+      '<div class="compat-radio-row">'+
+        '<div class="compat-radio'+(stato==='si'?' sel-si':'')+'" onclick="setCompat(\''+key+'\',\'si\')">✓ Compatibile</div>'+
+        '<div class="compat-radio'+(stato==='parziale'?' sel-parziale':'')+'" onclick="setCompat(\''+key+'\',\'parziale\')">⚠ Parziale</div>'+
+        '<div class="compat-radio'+(stato==='no'?' sel-no':'')+'" onclick="setCompat(\''+key+'\',\'no\')">✗ Non compat.</div>'+
+      '</div>'+
+      '<div class="compat-motivazioni'+(showMotiv?' show':'')+'">'+
+        '<div class="compat-motiv-title">Motivazioni normative:</div>'+
+        cfg.voci.map(function(v){
+          return '<label class="compat-check-row">'+
+            '<input type="checkbox" '+(checklist[v.id]?'checked':'')+' onchange="setCompatCheck(\''+key+'\',\''+v.id+'\',this.checked)"/>'+
+            '<span class="compat-check-label">'+v.testo+'</span></label>';
+        }).join('')+
+        '<textarea class="compat-note" placeholder="Note aggiuntive..." onchange="setCompatNote(\''+key+'\',this.value)">'+esc(note)+'</textarea>'+
+      '</div></div>';
+  });
+  body.innerHTML=html;
+}
+
+function setCompat(key,stato){var m=getActiveMansione();if(!m)return;if(!m.compat)m.compat=defaultCompat();m.compat[key].stato=stato;renderCompat();}
+function setCompatCheck(key,vid,val){var m=getActiveMansione();if(!m)return;if(!m.compat)m.compat=defaultCompat();m.compat[key].checklist[vid]=val;}
+function setCompatNote(key,val){var m=getActiveMansione();if(!m)return;if(!m.compat)m.compat=defaultCompat();m.compat[key].note=val;}
+
+function renderMisure(){
+  document.getElementById('misure-chips').innerHTML=misureList.map(function(m,idx){
+    var c=idx>=MISURE_DEFAULT.length?' mchip-custom':'';
+    return '<div class="mchip'+c+'" draggable="true" data-mis="'+esc(m)+'" ondragstart="onMisDrag(event)">'+m+'</div>';
+  }).join('');
+}
+
+function renderDpi(){
+  var m=getActiveMansione();
+  var placed=m&&m.dpiPlaced?m.dpiPlaced:[];
+  // libreria: chip disponibili (non ancora piazzati)
+  document.getElementById('dpi-chips').innerHTML=DPI_CATALOG.map(function(d){
+    var used=placed.indexOf(d.id)!==-1;
+    return '<div class="dchip'+(used?' dpi-used':'')+'" draggable="'+(used?'false':'true')+
+      '" data-dpiid="'+d.id+'" ondragstart="onDpiDrag(event)">'+d.icon+' '+d.nome+'</div>';
+  }).join('');
+  // drop zone
+  var zone=document.getElementById('dpi-dropzone');
+  if(placed.length){
+    zone.innerHTML=placed.map(function(id){
+      var d=DPI_CATALOG.find(function(x){return x.id===id;});
+      if(!d)return '';
+      return '<div class="dpi-placed">'+d.icon+' '+d.nome+
+        '<button class="dpi-placed-x" onclick="removeDpi(\''+id+'\')">×</button></div>';
+    }).join('');
+  } else {
+    zone.innerHTML='<span class="dpi-ph">Nessun DPI selezionato...</span>';
+  }
+}
+
+function onDpiDrag(e){
+  var id=e.currentTarget.dataset.dpiid;
+  var m=getActiveMansione();
+  if(m&&m.dpiPlaced&&m.dpiPlaced.indexOf(id)!==-1){e.preventDefault();return;}
+  dragSource='dpi';dragDpi=id;dragMis=null;dragId=null;
+  e.dataTransfer.effectAllowed='move';
+}
+function onDpiZoneOver(e){
+  if(dragSource!=='dpi')return;
+  e.preventDefault();
+  document.getElementById('dpi-dropzone').classList.add('over');
+}
+function onDpiZoneLeave(e){
+  document.getElementById('dpi-dropzone').classList.remove('over');
+}
+function onDpiZoneDrop(e){
+  e.preventDefault();
+  document.getElementById('dpi-dropzone').classList.remove('over');
+  if(dragSource!=='dpi'||!dragDpi)return;
+  var m=getActiveMansione();if(!m)return;
+  if(!m.dpiPlaced)m.dpiPlaced=[];
+  if(m.dpiPlaced.indexOf(dragDpi)===-1)m.dpiPlaced.push(dragDpi);
+  dragDpi=null;dragSource=null;
+  renderDpi();
+}
+function removeDpi(id){
+  var m=getActiveMansione();if(!m)return;
+  if(!m.dpiPlaced)return;
+  m.dpiPlaced=m.dpiPlaced.filter(function(x){return x!==id;});
+  renderDpi();
+}
+
+function render(){renderTabs();renderMansioneInfo();renderLib();renderMatrix();renderTable();renderCompat();renderDpi();}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function onLibDrag(e){dragSource='lib';dragId=e.currentTarget.dataset.libid;dragMis=null;dragDpi=null;e.dataTransfer.effectAllowed='move';}
+function onPlacedDrag(e){dragSource='placed';dragId=e.currentTarget.dataset.placedid;dragMis=null;dragDpi=null;e.dataTransfer.effectAllowed='move';}
+function onMisDrag(e){dragSource='mis';dragMis=e.currentTarget.dataset.mis;dragId=null;dragDpi=null;e.dataTransfer.effectAllowed='copy';}
+function onMisCellOver(e,el){e.preventDefault();if(dragSource==='mis')el.classList.add('drag-over-mis');}
+function onMisCellLeave(el){el.classList.remove('drag-over-mis');}
+function onMisCellDrop(e,el){
+  e.preventDefault();el.classList.remove('drag-over-mis');
+  if(dragSource!=='mis'||!dragMis)return;
+  var m=getActiveMansione();if(!m)return;
+  var pk=m.placed.find(function(k){return k.id===el.dataset.pkid;});if(!pk)return;
+  if(!pk.misTags)pk.misTags=[];
+  if(pk.misTags.indexOf(dragMis)===-1)pk.misTags.push(dragMis);
+  dragMis=null;dragSource=null;renderTable();
+}
+function removeTag(pkid,idx){
+  var m=getActiveMansione();if(!m)return;
+  var pk=m.placed.find(function(k){return k.id===pkid;});
+  if(pk&&pk.misTags)pk.misTags.splice(idx,1);renderTable();
+}
+function onDrop(p,d){
+  var m=getActiveMansione();if(!m)return;
+  if(dragSource==='lib'){
+    var item=libItems.find(function(i){return i.id===dragId;});if(!item)return;
+    if(m.placed.find(function(pk){return pk.libId===item.id;}))return;
+    m.counter=(m.counter||0)+1;
+    m.placed.push({id:'pk_'+Date.now(),libId:item.id,name:item.name,cat:item.cat,
+      desc:item.desc||'',code:'R'+String(m.counter).padStart(2,'0'),p:p,d:d,misTags:[],misText:''});
+  } else if(dragSource==='placed'){
+    var pk=m.placed.find(function(k){return k.id===dragId;});if(pk){pk.p=p;pk.d=d;}
+  }
+  dragSource=null;dragId=null;render();
+}
+function removeRisk(id){
+  var m=getActiveMansione();if(!m)return;
+  m.placed=m.placed.filter(function(k){return k.id!==id;});render();
+}
+
+function openAddMansioneModal(){
+  document.getElementById('mm-nome').value='';document.getElementById('mm-desc').value='';document.getElementById('mm-attrezz').value='';
+  openModal('modal-mansione');setTimeout(function(){document.getElementById('mm-nome').focus();},100);
+}
+function confirmAddMansione(){
+  var m={id:genId(),nome:document.getElementById('mm-nome').value.trim()||'Nuova mansione',
+    desc:document.getElementById('mm-desc').value.trim(),attrezz:document.getElementById('mm-attrezz').value.trim(),
+    placed:[],counter:0,compat:defaultCompat(),dpiPlaced:[]};
+  mansioni.push(m);activeMId=m.id;closeModal('modal-mansione');render();
+}
+function switchMansione(id){activeMId=id;render();}
+function deleteMansione(e,id){
+  e.stopPropagation();if(!confirm('Eliminare questa mansione?'))return;
+  mansioni=mansioni.filter(function(m){return m.id!==id;});
+  if(activeMId===id)activeMId=mansioni.length?mansioni[0].id:null;render();
+}
+function updateMansioneField(field,val){
+  var m=getActiveMansione();if(!m)return;
+  if(field==='nome'){m.nome=val;renderTabs();document.getElementById('tbl-ttl').textContent='Registro valutazione rischi'+(val?' — '+val:'');}
+  else if(field==='desc')m.desc=val;
+  else if(field==='attrezz')m.attrezz=val;
+}
+function openAddRiskModal(){
+  document.getElementById('mr-name').value='';document.getElementById('mr-cat').value='Generali';document.getElementById('mr-desc').value='';
+  openModal('modal-risk');setTimeout(function(){document.getElementById('mr-name').focus();},100);
+}
+function confirmAddRisk(){
+  var name=document.getElementById('mr-name').value.trim();if(!name){alert('Inserisci il nome del rischio.');return;}
+  libItems.push({id:'L_CUSTOM_'+name.replace(/\W/g,'_')+'_'+Date.now(),name:name,cat:document.getElementById('mr-cat').value,desc:document.getElementById('mr-desc').value.trim()});
+  closeModal('modal-risk');render();
+}
+function openAddMisModal(){
+  document.getElementById('mm-mis-name').value='';openModal('modal-mis');
+  setTimeout(function(){document.getElementById('mm-mis-name').focus();},100);
+}
+function confirmAddMis(){
+  var name=document.getElementById('mm-mis-name').value.trim();if(!name){alert('Inserisci il nome della misura.');return;}
+  if(misureList.indexOf(name)===-1)misureList.push(name);closeModal('modal-mis');renderMisure();
+}
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+
+function saveMansioneJSON(){
+  var m=getActiveMansione();if(!m){alert('Nessuna mansione attiva.');return;}
+  var blob=new Blob([JSON.stringify({_type:'mansione_template',nome:m.nome,desc:m.desc,attrezz:m.attrezz||'',placed:m.placed,counter:m.counter,compat:m.compat||defaultCompat(),dpiPlaced:m.dpiPlaced||[]},null,2)],{type:'application/json'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='mansione_'+(m.nome||'template').replace(/\s+/g,'_').toLowerCase()+'.json';a.click();
+}
+function loadMansioneJSON(e){
+  var f=e.target.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    try{
+      var d=JSON.parse(ev.target.result);
+      if(d._type!=='mansione_template'){alert('File non valido.');return;}
+      var m=getActiveMansione();
+      if(m&&m.placed&&m.placed.length){
+        if(!confirm('Mansione attiva ha già dei rischi.\nOK = Sovrascrivi | Annulla = Crea nuova'))
+          {addMansioneFromTemplate(d);return;}
+      }
+      if(m){m.nome=d.nome||'';m.desc=d.desc||'';m.attrezz=d.attrezz||'';m.placed=d.placed||[];m.counter=d.counter||0;m.compat=d.compat||defaultCompat();m.dpiPlaced=d.dpiPlaced||[];render();}
+      else addMansioneFromTemplate(d);
+    }catch(err){alert('File non valido.');}
+  };
+  r.readAsText(f);e.target.value='';
+}
+function addMansioneFromTemplate(d){
+  var m={id:genId(),nome:d.nome||'Mansione importata',desc:d.desc||'',attrezz:d.attrezz||'',placed:d.placed||[],counter:d.counter||0,compat:d.compat||defaultCompat(),dpiPlaced:d.dpiPlaced||[]};
+  mansioni.push(m);activeMId=m.id;render();
+}
+
+// ANTEPRIMA
+function buildCompatBlock(m){
+  if(!m.compat)return '';
+  var hasData=Object.keys(COMPAT_MOTIVI).some(function(k){return m.compat[k]&&m.compat[k].stato;});
+  if(!hasData)return '';
+  var SC={si:'#22c55e',parziale:'#eab308',no:'#ef4444','':'#94a3b8'};
+  var SL={si:'Compatibile',parziale:'Parzialmente compatibile',no:'Non compatibile','':'Non valutato'};
+  var rows=Object.keys(COMPAT_MOTIVI).map(function(key){
+    var cfg=COMPAT_MOTIVI[key],c=m.compat[key]||{stato:'',checklist:{},note:''};
+    var stato=c.stato||'',color=SC[stato],label=SL[stato];
+    var mv=cfg.voci.filter(function(v){return c.checklist&&c.checklist[v.id];}).map(function(v){return v.testo;});
+    var mvHtml=mv.length?'<ul style="margin:3px 0 0 14px;font-size:10px;color:#475569">'+mv.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul>':'';
+    var noteHtml=c.note?'<div style="font-size:10px;color:#475569;margin-top:3px;font-style:italic">'+esc(c.note)+'</div>':'';
+    return '<tr style="background:#fff"><td style="font-weight:600;font-size:11px">'+cfg.icon+' '+cfg.label+'</td>'+
+      '<td style="font-size:10px;color:#64748b">'+cfg.ref+'</td>'+
+      '<td style="text-align:center"><span style="background:'+color+';color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px">'+label+'</span></td>'+
+      '<td>'+mvHtml+noteHtml+'</td></tr>';
+  }).join('');
+  return '<div style="background:#f8fafc;border-top:2px solid #1e3a8a;overflow:hidden">'+
+    '<div style="background:#1e3a8a;padding:7px 14px;font-size:11px;font-weight:700;color:#fff">⚖️ Compatibilità mansione — tutele speciali</div>'+
+    '<table style="width:100%;border-collapse:collapse;font-size:11px">'+
+    '<thead><tr style="background:#e2e8f0">'+
+      '<th style="padding:6px 10px;text-align:left;font-size:9px;font-weight:700;color:#475569;text-transform:uppercase;width:130px">Categoria</th>'+
+      '<th style="padding:6px 10px;text-align:left;font-size:9px;font-weight:700;color:#475569;text-transform:uppercase;width:180px">Rif. normativo</th>'+
+      '<th style="padding:6px 10px;text-align:center;font-size:9px;font-weight:700;color:#475569;text-transform:uppercase;width:130px">Esito</th>'+
+      '<th style="padding:6px 10px;text-align:left;font-size:9px;font-weight:700;color:#475569;text-transform:uppercase">Motivazioni e note</th>'+
+    '</tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+
+function buildPreviewBody(m,idx){
+  if(!m.placed||!m.placed.length)return '<div style="text-align:center;padding:24px;color:#94a3b8;font-size:12px">Nessun rischio valutato per questa mansione.</div>';
+  var sorted=m.placed.slice().sort(function(a,b){return(b.p*b.d)-(a.p*a.d);});
+  var rows=sorted.map(function(pk){
+    var r=pk.p*pk.d,lv=getLevel(r);
+    var misVal=(pk.misTags&&pk.misTags.length)?pk.misTags.join(' • ')+(pk.misText?' • '+pk.misText:''):(pk.misText||'');
+    return '<tr>'+
+      '<td style="font-weight:600;font-size:11px">'+esc(pk.name)+'</td>'+
+      '<td><textarea class="editable" rows="2" placeholder="Descrizione..." onchange="syncDesc(\''+m.id+'\',\''+pk.id+'\',this.value)">'+esc(pk.desc||'')+'</textarea></td>'+
+      '<td style="text-align:center;font-weight:700">'+pk.p+'</td><td style="text-align:center;font-weight:700">'+pk.d+'</td>'+
+      '<td style="text-align:center"><span style="background:'+BGMAP[lv]+';color:'+TCMAP[lv]+';font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px;display:inline-block">'+r+'</span></td>'+
+      '<td style="text-align:center;font-weight:600;color:'+BGMAP[lv]+'">'+getLevelLabel(r)+'</td>'+
+      '<td><textarea class="editable" rows="2" placeholder="Misure..." onchange="syncMis(\''+m.id+'\',\''+pk.id+'\',this.value)">'+esc(misVal)+'</textarea></td>'+
+      '</tr>';
+  }).join('');
+  return '<div class="prev-mansione-hdr">'+
+    '<span class="prev-mansione-badge">Mansione '+(idx+1)+'</span>'+
+    '<div><div class="prev-mansione-name">'+esc(m.nome||'Senza nome')+'</div>'+
+    (m.desc||m.attrezz?'<div class="prev-mansione-sub">'+(m.desc||'')+(m.attrezz?' — Attrezzature: '+m.attrezz:'')+'</div>':'')+
+    '</div></div>'+
+    '<div class="prev-legbar">'+
+    '<span class="prev-li"><span class="prev-ld" style="background:#22c55e"></span>Basso R 1÷4</span>'+
+    '<span class="prev-li"><span class="prev-ld" style="background:#eab308"></span>Medio R 5÷8</span>'+
+    '<span class="prev-li"><span class="prev-ld" style="background:#f97316"></span>Alto R 9÷12</span>'+
+    '<span class="prev-li"><span class="prev-ld" style="background:#ef4444"></span>Molto alto R 13÷16</span>'+
+    '<span class="prev-legend-note">P = Probabilità | D = Danno | R = P × D</span></div>'+
+    '<table class="prev-table"><thead><tr>'+
+    '<th style="width:110px">Rischio</th><th style="width:22%">Descrizione</th>'+
+    '<th style="width:26px;text-align:center">P</th><th style="width:26px;text-align:center">D</th>'+
+    '<th style="width:34px;text-align:center">R</th><th style="width:66px;text-align:center">Livello</th>'+
+    '<th>Misure di prevenzione e protezione</th>'+
+    '</tr></thead><tbody>'+rows+'</tbody></table>'+
+    buildCompatBlock(m)+
+    (m.dpiPlaced&&m.dpiPlaced.length?
+      '<div style="background:#f0f9ff;border-top:2px solid #0369a1;padding:8px 18px">'+
+      '<div style="font-size:10px;font-weight:700;color:#0369a1;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">🦺 DPI previsti per la mansione</div>'+
+      '<div style="display:flex;flex-wrap:wrap;gap:4px">'+
+      m.dpiPlaced.map(function(id){
+        var d=DPI_CATALOG.find(function(x){return x.id===id;});
+        return d?'<span style="display:inline-flex;align-items:center;gap:3px;background:#0ea5e9;color:#fff;font-size:11px;font-weight:600;padding:4px 11px;border-radius:999px">'+d.icon+' '+d.nome+'</span>':'';
+      }).join('')+
+      '</div></div>':'');
+}
+
+function renderPrevTabs(){
+  var bar=document.getElementById('prev-tabs-bar');
+  var withRischi=mansioni.filter(function(m){return m.placed&&m.placed.length;});
+  if(!withRischi.length)return;
+  if(!activePrevTabId||!withRischi.find(function(m){return m.id===activePrevTabId;}))
+    activePrevTabId=withRischi[0].id;
+  bar.innerHTML=withRischi.map(function(m){
+    return '<div class="prev-tab'+(m.id===activePrevTabId?' active':'')+'" onclick="switchPrevTab(\''+m.id+'\')">'+
+      (m.nome||'Mansione '+(mansioni.indexOf(m)+1))+'</div>';
+  }).join('');
+  renderPrevContent();
+}
+function switchPrevTab(id){
+  activePrevTabId=id;
+  document.querySelectorAll('#prev-content textarea').forEach(function(ta){ta.dispatchEvent(new Event('change'));});
+  renderPrevTabs();
+}
+function renderPrevContent(){
+  var m=mansioni.find(function(x){return x.id===activePrevTabId;});
+  var idx=mansioni.indexOf(m);
+  document.getElementById('prev-content').innerHTML=m?buildPreviewBody(m,idx):'';
+}
+function openPreview(){
+  var hasRischi=mansioni.some(function(m){return m.placed&&m.placed.length;});
+  if(!hasRischi){alert('Aggiungi almeno un rischio prima.');return;}
+  var az=document.getElementById('az').value||'—',dt=document.getElementById('az-date').value||'—';
+  document.getElementById('prev-meta').innerHTML=
+    '<div><strong>Azienda:</strong> '+esc(az)+'</div>'+
+    '<div><strong>Data:</strong> '+esc(dt)+'</div>'+
+    '<div><strong>Mansioni:</strong> '+mansioni.filter(function(m){return m.placed&&m.placed.length;}).length+'</div>';
+  activePrevTabId=null;renderPrevTabs();
+  document.getElementById('main-view').style.display='none';
+  document.getElementById('preview-panel').classList.add('open');
+}
+function syncDesc(mid,pkid,val){var m=mansioni.find(function(x){return x.id===mid;});if(m){var pk=m.placed.find(function(k){return k.id===pkid;});if(pk)pk.desc=val;}}
+function syncMis(mid,pkid,val){var m=mansioni.find(function(x){return x.id===mid;});if(m){var pk=m.placed.find(function(k){return k.id===pkid;});if(pk){pk.misText=val;}}}
+function closePreview(){
+  document.querySelectorAll('#prev-content textarea').forEach(function(ta){ta.dispatchEvent(new Event('change'));});
+  document.getElementById('preview-panel').classList.remove('open');
+  document.getElementById('main-view').style.display='';renderTable();
+}
+function flushPreviewEdits(){document.querySelectorAll('#prev-content textarea').forEach(function(ta){ta.dispatchEvent(new Event('change'));});}
+
+var PRINT_CSS='@page{size:A4 landscape;margin:14mm 13mm}*{box-sizing:border-box}'+
+  'body{font-family:"Segoe UI",-apple-system,Arial,sans-serif;font-size:11px;color:#1e293b;margin:0;padding:0}'+
+  'td{padding:6px 8px;vertical-align:top;border-bottom:1px solid #e2e8f0;font-size:10px}'+
+  'table{width:100%;border-collapse:collapse}'+
+  'thead tr th{background:#1e40af!important;color:#fff;font-size:9px;font-weight:600;padding:8px;text-align:left;text-transform:uppercase;letter-spacing:.3px}'+
+  '.no-break{page-break-inside:avoid;break-inside:avoid}'+
+  '@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}.no-break{page-break-inside:avoid;break-inside:avoid}}';
+
+function buildPrintBlock(m,idx,az,dt){
+  if(!m.placed||!m.placed.length)return '';
+  var sorted=m.placed.slice().sort(function(a,b){return(b.p*b.d)-(a.p*a.d);});
+  var rows=sorted.map(function(pk,i){
+    var r=pk.p*pk.d,lv=getLevel(r);
+    var misAll=(pk.misTags&&pk.misTags.length)?pk.misTags.join(' • ')+(pk.misText?' • '+pk.misText:''):(pk.misText||'—');
+    var bg=i%2===0?'#fff':'#f8fafc';
+    return '<tr style="background:'+bg+'">'+
+      '<td style="font-weight:600;width:110px">'+esc(pk.name)+'</td>'+
+      '<td style="width:22%;font-size:10px;color:#475569;line-height:1.4">'+esc(pk.desc||'—')+'</td>'+
+      '<td style="text-align:center;font-weight:700;width:22px">'+pk.p+'</td>'+
+      '<td style="text-align:center;font-weight:700;width:22px">'+pk.d+'</td>'+
+      '<td style="text-align:center;width:30px"><span style="background:'+BGMAP[lv]+';color:'+TCMAP[lv]+';font-size:11px;font-weight:700;padding:2px 6px;border-radius:5px;display:inline-block">'+r+'</span></td>'+
+      '<td style="text-align:center;font-weight:600;color:'+BGMAP[lv]+';width:58px">'+getLevelLabel(r)+'</td>'+
+      '<td style="font-size:10px;color:#334155;line-height:1.4">'+esc(misAll)+'</td></tr>';
+  }).join('');
+  var SC={si:'#22c55e',parziale:'#eab308',no:'#ef4444','':'#94a3b8'};
+  var SL={si:'Compatibile',parziale:'Parzialmente compatibile',no:'Non compatibile','':'Non valutato'};
+  var compatHtml='';
+  if(m.compat&&Object.keys(COMPAT_MOTIVI).some(function(k){return m.compat[k]&&m.compat[k].stato;})){
+    var compatRows=Object.keys(COMPAT_MOTIVI).map(function(key){
+      var cfg=COMPAT_MOTIVI[key],c=m.compat[key]||{stato:'',checklist:{},note:''};
+      var stato=c.stato||'',color=SC[stato],label=SL[stato];
+      var mv=cfg.voci.filter(function(v){return c.checklist&&c.checklist[v.id];}).map(function(v){return v.testo;});
+      var mvHtml=mv.length?'<ul style="margin:2px 0 0 12px;font-size:9px;color:#475569">'+mv.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul>':'';
+      var noteHtml=c.note?'<div style="font-size:9px;color:#475569;margin-top:2px;font-style:italic">'+esc(c.note)+'</div>':'';
+      return '<tr style="background:#fff"><td style="font-weight:600;font-size:10px;width:130px">'+cfg.icon+' '+cfg.label+'</td>'+
+        '<td style="font-size:9px;color:#64748b;width:160px">'+cfg.ref+'</td>'+
+        '<td style="text-align:center;width:130px"><span style="background:'+color+';color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:999px">'+label+'</span></td>'+
+        '<td>'+mvHtml+noteHtml+'</td></tr>';
+    }).join('');
+    compatHtml='<div style="margin-top:8px;border:1px solid #e2e8f0;border-radius:4px;overflow:hidden;page-break-inside:avoid;break-inside:avoid">'+
+      '<div style="background:#1e3a8a;padding:6px 12px;font-size:11px;font-weight:700;color:#fff">⚖️ Compatibilità mansione — tutele speciali</div>'+
+      '<table><thead><tr><th style="width:130px">Categoria</th><th style="width:160px">Rif. normativo</th>'+
+      '<th style="width:130px;text-align:center">Esito</th><th>Motivazioni normative e note</th>'+
+      '</tr></thead><tbody>'+compatRows+'</tbody></table></div>';
+  }
+  return '<div style="page-break-before:'+(idx>0?'always':'auto')+'">'+
+    '<div style="display:flex;align-items:flex-start;justify-content:space-between;border-bottom:3px solid #1e40af;padding-bottom:9px;margin-bottom:9px">'+
+    '<div><div style="font-size:16px;font-weight:700;color:#1e40af">Valutazione dei Rischi</div>'+
+    '<div style="font-size:10px;color:#64748b;margin-top:2px">D.Lgs. 81/08 — Testo Unico Salute e Sicurezza — Metodo P×D</div></div>'+
+    '<div style="text-align:right;font-size:11px;color:#475569;line-height:1.8">'+
+    '<div><strong>Azienda:</strong> '+esc(az)+'</div><div><strong>Data:</strong> '+esc(dt)+'</div></div></div>'+
+    '<div style="background:#1e3a8a;padding:7px 12px;border-radius:5px 5px 0 0;display:flex;align-items:flex-start;gap:10px">'+
+    '<span style="background:#3b82f6;color:#fff;font-size:10px;font-weight:700;padding:2px 10px;border-radius:999px;flex-shrink:0;margin-top:2px">Mansione '+(idx+1)+'</span>'+
+    '<div><div style="font-size:12px;font-weight:700;color:#fff">'+esc(m.nome||'Senza nome')+'</div>'+
+    (m.desc?'<div style="font-size:10px;color:#bfdbfe">'+esc(m.desc)+'</div>':'')+
+    (m.attrezz?'<div style="font-size:10px;color:#93c5fd"><strong style="color:#bfdbfe">Attrezzature:</strong> '+esc(m.attrezz)+'</div>':'')+
+    '</div></div>'+
+    '<div style="display:flex;gap:12px;padding:6px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-top:none;margin-bottom:8px;flex-wrap:wrap">'+
+    '<span style="display:flex;align-items:center;gap:4px;font-size:9px;color:#475569"><span style="width:9px;height:9px;background:#22c55e;border-radius:2px;display:inline-block"></span>Basso 1÷4</span>'+
+    '<span style="display:flex;align-items:center;gap:4px;font-size:9px;color:#475569"><span style="width:9px;height:9px;background:#eab308;border-radius:2px;display:inline-block"></span>Medio 5÷8</span>'+
+    '<span style="display:flex;align-items:center;gap:4px;font-size:9px;color:#475569"><span style="width:9px;height:9px;background:#f97316;border-radius:2px;display:inline-block"></span>Alto 9÷12</span>'+
+    '<span style="display:flex;align-items:center;gap:4px;font-size:9px;color:#475569"><span style="width:9px;height:9px;background:#ef4444;border-radius:2px;display:inline-block"></span>Molto alto 13÷16</span>'+
+    '<span style="margin-left:auto;font-size:9px;color:#94a3b8">P = Probabilità | D = Danno | R = P × D | Rischi: '+m.placed.length+'</span></div>'+
+    '<table><thead><tr>'+
+    '<th style="width:110px">Rischio</th><th style="width:22%">Descrizione</th>'+
+    '<th style="width:22px;text-align:center">P</th><th style="width:22px;text-align:center">D</th>'+
+    '<th style="width:30px;text-align:center">R</th><th style="width:58px;text-align:center">Livello</th>'+
+    '<th>Misure di prevenzione e protezione adottate</th>'+
+    '</tr></thead><tbody>'+rows+'</tbody></table>'+compatHtml+
+    // DPI block in stampa
+    (m.dpiPlaced&&m.dpiPlaced.length?
+      '<div style="margin-top:8px;border:1px solid #bae6fd;border-radius:5px;overflow:hidden;page-break-inside:avoid;break-inside:avoid">'+
+      '<div style="background:#0369a1;padding:6px 12px;font-size:10px;font-weight:700;color:#fff">🦺 DPI previsti per la mansione</div>'+
+      '<div style="padding:7px 12px;background:#f0f9ff;display:flex;flex-wrap:wrap;gap:4px">'+
+      m.dpiPlaced.map(function(id){
+        var d=DPI_CATALOG.find(function(x){return x.id===id;});
+        return d?'<span style="display:inline-flex;align-items:center;gap:3px;background:#0ea5e9;color:#fff;font-size:10px;font-weight:600;padding:3px 10px;border-radius:999px">'+d.icon+' '+d.nome+'</span>':'';
+      }).join('')+
+      '</div></div>':'') +
+    '<div style="margin-top:10px;display:flex;justify-content:space-between;font-size:9px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:6px">'+
+    '<span>Suite Sicurezza — Studio Essepi S.r.l.</span><span>Revisione: 01 | Data: '+esc(dt)+'</span></div></div>';
+}
+function openPrintWindow(blocks){
+  var w=window.open('','_blank');
+  w.document.write('<!DOCTYPE html><html><head><title>DVR</title><style>'+PRINT_CSS+'</style></head><body>'+blocks+'<script>window.onload=function(){window.print();}<\/script></body></html>');
+  w.document.close();
+}
+function printCurrentPrevTab(){
+  flushPreviewEdits();
+  var az=document.getElementById('az').value||'Azienda',dt=document.getElementById('az-date').value||new Date().toLocaleDateString('it-IT');
+  var m=mansioni.find(function(x){return x.id===activePrevTabId;});
+  if(!m||!m.placed||!m.placed.length){alert('Nessun rischio da stampare.');return;}
+  openPrintWindow(buildPrintBlock(m,mansioni.indexOf(m),az,dt));
+}
+function printAll(){
+  flushPreviewEdits();
+  var az=document.getElementById('az').value||'Azienda',dt=document.getElementById('az-date').value||new Date().toLocaleDateString('it-IT');
+  var blocks=mansioni.map(function(m,i){return buildPrintBlock(m,i,az,dt);}).join('');
+  if(!blocks.trim()){alert('Nessuna mansione con rischi.');return;}
+  openPrintWindow(blocks);
+}
+function saveJSON(){
+  var az=document.getElementById('az').value,dt=document.getElementById('az-date').value;
+  var customLib=libItems.filter(function(i){return !CATALOG.find(function(c){return c.name===i.name&&c.cat===i.cat;});});
+  var customMis=misureList.filter(function(m){return MISURE_DEFAULT.indexOf(m)===-1;});
+  var blob=new Blob([JSON.stringify({_type:'valutazione_completa',az:az,dt:dt,mansioni:mansioni,customLib:customLib,customMis:customMis},null,2)],{type:'application/json'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(az||'valutazione_rischi')+'.json';a.click();
+}
+function loadAllJSON(e){
+  var f=e.target.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(ev){
+    try{
+      var d=JSON.parse(ev.target.result);
+      document.getElementById('az').value=d.az||'';document.getElementById('az-date').value=d.dt||'';
+      mansioni=d.mansioni||[];
+      mansioni.forEach(function(m){if(!m.compat)m.compat=defaultCompat();if(!m.attrezz)m.attrezz='';if(!m.dpiPlaced)m.dpiPlaced=[];});
+      activeMId=mansioni.length?mansioni[0].id:null;
+      if(d.customLib)d.customLib.forEach(function(ci){if(!libItems.find(function(x){return x.id===ci.id;}))libItems.push(ci);});
+      if(d.customMis)d.customMis.forEach(function(m){if(misureList.indexOf(m)===-1)misureList.push(m);});
+      render();renderMisure();
+    }catch(err){alert('File non valido.');}
+  };
+  r.readAsText(f);e.target.value='';
+}
+
+document.getElementById('az-date').value=new Date().toISOString().split('T')[0];
+initLib();
+var firstM={id:genId(),nome:'',desc:'',attrezz:'',placed:[],counter:0,compat:defaultCompat(),dpiPlaced:[]};
+mansioni.push(firstM);activeMId=firstM.id;
+render();renderMisure();
+</script>
